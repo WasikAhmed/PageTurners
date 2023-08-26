@@ -1,15 +1,20 @@
-@model dynamic
+@model List<Category>
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Hello</title>
-</head>
-<body>
-<div>
-    <h1>Category List</h1>
-</div>
-</body>
-</html>
+<h1>Category List</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Category Name</th>
+        <th>Display Order</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.OrderByDescending(u => u.DisplayOrder))
+        {
+            <tr>
+                <td>@obj.Name</td>
+                <td>@obj.DisplayOrder</td>
+            </tr>
+        }
+    </tbody>
+</table>
