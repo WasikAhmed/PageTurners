@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PageTurnersWeb.Data;
 using PageTurnersWeb.Models;
 
@@ -29,6 +30,14 @@ namespace PageTurnersWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            { 
+                ModelState.AddModelError("name", "The display order cannot exactly match the name");
+            }
+            // if (obj.Name != null && obj.Name.ToLower()=="test")
+            // {
+            //     ModelState.AddModelError("", "Test is an invalid value");
+            // }
             if (ModelState.IsValid)
             {
                 _db.Categories.Add(obj);

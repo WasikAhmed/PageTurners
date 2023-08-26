@@ -6,6 +6,7 @@
             <h2>Create Category</h2>
             <hr/>
         </div>
+        @*<div asp-validation-summary="All"></div> Also can be used ModelOnly*@
         <div class="mb-2">
             <label asp-for="Name" class="mb-1"></label>
             <input asp-for="Name" class="form-control">
@@ -26,8 +27,12 @@
                 </a>
             </div>
         </div>
-        
-        
-        
     </div>
 </form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
