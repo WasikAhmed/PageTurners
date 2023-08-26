@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using PageTurnersWeb.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options=> 
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException()));
 
 var app = builder.Build();
 
