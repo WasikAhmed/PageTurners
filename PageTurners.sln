@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageTurnersWeb", "PageTurne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{32FC8930-5567-4F90-9107-A17BE183241D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{746A3EFD-AFB6-4716-B366-876855BF4CA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageTurners.Models", "PageTurners.Models\PageTurners.Models.csproj", "{746A3EFD-AFB6-4716-B366-876855BF4CA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{98D261D2-C087-4D3E-892D-456329361919}"
 EndProject

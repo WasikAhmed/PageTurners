@@ -16,4 +16,8 @@
       <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.5" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PageTurnersWeb.Data;
+using DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

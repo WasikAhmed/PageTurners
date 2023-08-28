@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PageTurnersWeb.Models;
+namespace PageTurners.Models;
 
 public class Category
 {

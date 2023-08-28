@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PageTurnersWeb.Models;
+using PageTurners.Models;
 
-namespace PageTurnersWeb.Data;
+namespace DataAccess.Data;
 
 public class ApplicationDbContext : DbContext
 {
