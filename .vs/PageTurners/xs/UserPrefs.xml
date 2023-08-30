@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="Multiple Projects">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataAccess/Migrations/20230826031240_AddCategoryTableToDb.cs">
+    <Files>
+      <File FileName="DataAccess/Data/ApplicationDbContext.cs" Line="1" Column="1" />
+      <File FileName="PageTurnersWeb/Controllers/CategoryController.cs" Line="114" Column="2" />
+      <File FileName="DataAccess/Migrations/20230826031240_AddCategoryTableToDb.cs" Line="1" Column="1" />
+      <File FileName="DataAccess/Migrations/20230826031240_AddCategoryTableToDb.Designer.cs" Line="33" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="PageTurners" expanded="True">
+            <Node name="DataAccess">
+              <Node name="Data" expanded="True" />
+              <Node name="Migrations" expanded="True">
+                <Node name="20230826031240_AddCategoryTableToDb.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="PageTurnersWeb">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.PageTurnersWeb PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="Multiple Projects" Name="Multiple Projects">
+      <Items>
+        <StartupItem ItemId="{2F527CA2-926D-4D73-A61C-2ABCE04D7BF5}" ItemName="PageTurnersWeb" ConfigurationId="https" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
+</Properties>

@@ -21,4 +21,12 @@
       <ProjectReference Include="..\Utility\Utility.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Repository\" />
+      <None Remove="Repository\IRepository\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Repository\" />
+      <Folder Include="Repository\IRepository\" />
+    </ItemGroup>
 </Project>
