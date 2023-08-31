@@ -13,11 +13,6 @@ namespace DataAccess.Repository
             _db = db;
 		}
 
-        public void save()
-        {
-            _db.SaveChanges();
-        }
-
         public void update(Category obj)
         {
             _db.Categories.Update(obj);
