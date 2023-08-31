@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using DataAccess.Data;
-using PageTurners.Models;
 using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Mvc;
+using PageTurners.Models;
 
-namespace PageTurnersWeb.Controllers
+namespace PageTurnersWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         //private readonly ICategoryRepository _categoryRepo;
