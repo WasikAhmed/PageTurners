@@ -18,14 +18,13 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        // GET: Product
+        
         public ActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
             return View(objProductList);
         }
-
-        // GET: Product/Create
+        
         public ActionResult Create()
         {
             return View();
@@ -34,13 +33,54 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Product obj)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    _unitOfWork.Product.Add(obj);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Product added successfully";
+                    
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                return View();
+            }
 
-                return RedirectToAction(nameof(Index));
+            return View();
+        }
+        
+        public ActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
+            if (productFromDb == null)
+            {
+                return NotFound();
+            }
+            
+            return View(productFromDb);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Product obj)
+        {
+            try
+            {
+                _unitOfWork.Product.Update(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Product updated successfully";
+
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -48,45 +88,39 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
             }
         }
 
-        // GET: Product/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
-        }
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-        // POST: Product/Edit/5
-        [HttpPost]
+            Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
+            if (productFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(productFromDb);
+        }
+        
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult DeletePOST(int? id)
         {
             try
             {
-                // TODO: Add update logic here
+                Product? obj = _unitOfWork.Product.Get(u => u.Id == id);
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+                
+                _unitOfWork.Product.Remove(obj);
+                _unitOfWork.Save();
+                TempData["success"] = "Product deleted successfully";
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Product/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Product/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             catch
             {
