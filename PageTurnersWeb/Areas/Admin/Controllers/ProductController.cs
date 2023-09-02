@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PageTurners.Models;
+using PageTurners.Models.ViewModels;
 
 namespace PageTurnersWeb.Areas.Admin.Controllers
 {
@@ -36,33 +37,46 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
                     Value = u.Id.ToString()
                 });
 
-            ViewBag.CategoryList = CategoryList;
+            //ViewBag.CategoryList = CategoryList;
+            //ViewData["CategoryList"] = CategoryList;
+            ProductViewModel productViewModel = new()
+            {
+                CategoryList = CategoryList,
+                Product = new Product()
+            };
             
-            return View();
+            return View(productViewModel);
         }
 
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product obj)
+        public ActionResult Create(ProductViewModel productViewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _unitOfWork.Product.Add(obj);
+                    _unitOfWork.Product.Add(productViewModel.Product);
                     _unitOfWork.Save();
                     TempData["success"] = "Product added successfully";
                     
                     return RedirectToAction("Index");
+                }
+                else
+                {
+                    productViewModel.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    });
+                    return View(productViewModel);
                 }
             }
             catch
             {
                 return View();
             }
-
-            return View();
         }
         
         public ActionResult Edit(int? id)
