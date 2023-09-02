@@ -76,7 +76,7 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
             {
                 //_categoryRepo.update(obj);
                 //_categoryRepo.save();
-                _unitOfWork.Category.update(obj);
+                _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
