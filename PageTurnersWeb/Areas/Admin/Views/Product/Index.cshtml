@@ -13,13 +13,13 @@
             <div class="col-6">
             </div>
             <div class="col-6 text-end">
-                <a asp-controller="Product" asp-action="Create" class="btn btn-primary">
+                <a asp-controller="Product" asp-action="Upsert" class="btn btn-primary">
                     <i class="bi bi-plus-circle"></i> Add New Product
                 </a>
             </div>
         </div>
     </div>
-        
+
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
@@ -42,7 +42,7 @@
                 <td></td>
                 <td>
                     <div class="w-75 btn-group align-content-lg-end" role="group">
-                        <a asp-controller="Product" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                        <a asp-controller="Product" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                             <i class="bi bi-pencil-square"></i> Edit
                         </a>
                         <a asp-controller="Product" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">

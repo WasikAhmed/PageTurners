@@ -27,91 +27,140 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
 
             return View(objProductList);
         }
+        // public ActionResult Create()
+        // {
+        //     IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+        //         .GetAll().Select(u=>new SelectListItem
+        //         {
+        //             Text = u.Name,
+        //             Value = u.Id.ToString()
+        //         });
+        //
+        //     //ViewBag.CategoryList = CategoryList;
+        //     //ViewData["CategoryList"] = CategoryList;
+        //     ProductViewModel productViewModel = new()
+        //     {
+        //         CategoryList = CategoryList,
+        //         Product = new Product()
+        //     };
+        //     
+        //     return View(productViewModel);
+        // }
         
-        public ActionResult Create()
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public ActionResult Create(ProductViewModel productViewModel)
+        // {
+        //     try
+        //     {
+        //         if (ModelState.IsValid)
+        //         {
+        //             _unitOfWork.Product.Add(productViewModel.Product);
+        //             _unitOfWork.Save();
+        //             TempData["success"] = "Product added successfully";
+        //             
+        //             return RedirectToAction("Index");
+        //         }
+        //         else
+        //         {
+        //             productViewModel.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+        //             {
+        //                 Text = u.Name,
+        //                 Value = u.Id.ToString()
+        //             });
+        //             return View(productViewModel);
+        //         }
+        //     }
+        //     catch
+        //     {
+        //         return View();
+        //     }
+        // }
+        
+        public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
-                .GetAll().Select(u=>new SelectListItem
+            ProductViewModel productViewModel = new()
+            {
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
-                });
-
-            //ViewBag.CategoryList = CategoryList;
-            //ViewData["CategoryList"] = CategoryList;
-            ProductViewModel productViewModel = new()
-            {
-                CategoryList = CategoryList,
+                }),
                 Product = new Product()
             };
-            
-            return View(productViewModel);
-        }
-
-        // POST: Product/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ProductViewModel productViewModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    _unitOfWork.Product.Add(productViewModel.Product);
-                    _unitOfWork.Save();
-                    TempData["success"] = "Product added successfully";
-                    
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    productViewModel.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
-                    {
-                        Text = u.Name,
-                        Value = u.Id.ToString()
-                    });
-                    return View(productViewModel);
-                }
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        
-        public ActionResult Edit(int? id)
-        {
             if (id == null || id == 0)
             {
-                return NotFound();
+                // create
+                return View(productViewModel);
             }
-
-            Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productFromDb == null)
+            else
             {
-                return NotFound();
+                // update
+                productViewModel.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productViewModel);
             }
-            
-            return View(productFromDb);
+        }
+
+        [HttpPost,ActionName("Upsert")]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpsertPOST(int? id)
+        {
+            ProductViewModel productViewModel = new()
+            {
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }),
+                Product = new Product()
+            };
+            if (id == null || id == 0)
+            {
+                // create
+                return View(productViewModel);
+            }
+            else
+            {
+                // update
+                productViewModel.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productViewModel);
+            }
         }
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Product obj)
-        {
-            try
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Product updated successfully";
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
+        // public ActionResult Edit(int? id)
+        // {
+        //     if (id == null || id == 0)
+        //     {
+        //         return NotFound();
+        //     }
+        //
+        //     Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
+        //     if (productFromDb == null)
+        //     {
+        //         return NotFound();
+        //     }
+        //     
+        //     return View(productFromDb);
+        // }
+        //
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public ActionResult Edit(Product obj)
+        // {
+        //     try
+        //     {
+        //         _unitOfWork.Product.Update(obj);
+        //         _unitOfWork.Save();
+        //         TempData["success"] = "Product updated successfully";
+        //
+        //         return RedirectToAction("Index");
+        //     }
+        //     catch
+        //     {
+        //         return View();
+        //     }
+        // }
 
         public ActionResult Delete(int? id)
         {
