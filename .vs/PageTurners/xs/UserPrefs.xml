@@ -12,27 +12,24 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="PageTurnersWeb/Controllers/CategoryController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataAccess/Data/ApplicationDbContext.cs">
     <Files>
       <File FileName="DataAccess/Data/ApplicationDbContext.cs" Line="1" Column="1" />
-      <File FileName="PageTurnersWeb/Controllers/CategoryController.cs" Line="33" Column="19" />
-      <File FileName="DataAccess/Repository/IRepository/IRepository.cs" Line="9" Column="1" />
-      <File FileName="DataAccess/Repository/Repository.cs" Line="46" Column="39" />
-      <File FileName="DataAccess/Repository/IRepository/ICategoryRepository.cs" Line="12" Column="1" />
-      <File FileName="DataAccess/Repository/CategoryRepository.cs" Line="14" Column="4" />
-      <File FileName="PageTurnersWeb/Program.cs" Line="15" Column="55" />
-      <File FileName="DataAccess/Repository/IRepository/IUnitOfWork.cs" Line="12" Column="1" />
-      <File FileName="DataAccess/Repository/UnitOfWork.cs" Line="12" Column="4" />
+      <File FileName="DataAccess/Repository/IRepository/IRepository.cs" />
+      <File FileName="DataAccess/Repository/Repository.cs" />
+      <File FileName="DataAccess/Repository/IRepository/ICategoryRepository.cs" />
+      <File FileName="DataAccess/Repository/CategoryRepository.cs" />
+      <File FileName="PageTurnersWeb/Program.cs" />
+      <File FileName="DataAccess/Repository/IRepository/IUnitOfWork.cs" />
+      <File FileName="DataAccess/Repository/UnitOfWork.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="PageTurners">
-            <Node name="DataAccess" selected="True">
-              <Node name="Data" expanded="True" />
-              <Node name="Migrations" expanded="True" />
-              <Node name="Repository">
-                <Node name="IRepository" expanded="True" />
+          <Node name="PageTurners" expanded="True">
+            <Node name="DataAccess" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="ApplicationDbContext.cs" selected="True" />
               </Node>
             </Node>
           </Node>
