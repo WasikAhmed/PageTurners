@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PageTurners.Models;
 
 namespace PageTurnersWeb.Areas.Admin.Controllers
@@ -22,11 +23,21 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
         public ActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+
             return View(objProductList);
         }
         
         public ActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                .GetAll().Select(u=>new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
+
+            ViewBag.CategoryList = CategoryList;
+            
             return View();
         }
 
