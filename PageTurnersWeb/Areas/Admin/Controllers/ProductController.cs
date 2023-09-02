@@ -15,10 +15,11 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         
         public ActionResult Index()
@@ -101,28 +102,42 @@ namespace PageTurnersWeb.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost,ActionName("Upsert")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpsertPOST(int? id)
+        public IActionResult Upsert(ProductViewModel productViewModel, IFormFile? file)
         {
-            ProductViewModel productViewModel = new()
+            if (ModelState.IsValid)
             {
-                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if (file != null)
                 {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                }),
-                Product = new Product()
-            };
-            if (id == null || id == 0)
-            {
-                // create
-                return View(productViewModel);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images/product");
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    productViewModel.Product.ImageUrl = @"/images/product/" + fileName;
+                }
+                
+                _unitOfWork.Product.Add(productViewModel.Product);
+                _unitOfWork.Save();
+                TempData["success"] = "Product added successfully";
+                return RedirectToAction("Index");
             }
             else
             {
-                // update
-                productViewModel.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                productViewModel = new()
+                {
+                    CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    }),
+                    Product = new Product()
+                };
                 return View(productViewModel);
             }
         }
