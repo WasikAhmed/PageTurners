@@ -32,7 +32,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="Repository\" />
     </ItemGroup>
     <ItemGroup>
       <Content Update="appsettings.json">
